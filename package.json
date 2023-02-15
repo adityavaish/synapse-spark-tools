@@ -17,7 +17,7 @@
   "activationEvents": [
     "onLanguage:python",
     "onLanguage:scala",
-    "onNotebook:synapse-notebook"
+    "onNotebook:synapse-spark"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -125,7 +125,7 @@
     },
     "notebooks": [
       {
-        "type": "synapse-notebook",
+        "type": "synapse-spark",
         "displayName": "Synapse notebook",
         "selector": [
           {
