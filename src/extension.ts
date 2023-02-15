@@ -125,20 +125,20 @@ export async function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(selectPool);
-  context.subscriptions.push(submitBatch);
-  context.subscriptions.push(configureAzureSubscription);
-  context.subscriptions.push(configureSynapseWorkspace);
-  context.subscriptions.push(configureTempAdlsAccount);
-  context.subscriptions.push(configureTempAdlsContainer);
-  context.subscriptions.push(configureTempAdlsPath);
-  context.subscriptions.push(configureAll);
+  // context.subscriptions.push(selectPool);
+  // context.subscriptions.push(submitBatch);
+  // context.subscriptions.push(configureAzureSubscription);
+  // context.subscriptions.push(configureSynapseWorkspace);
+  // context.subscriptions.push(configureTempAdlsAccount);
+  // context.subscriptions.push(configureTempAdlsContainer);
+  // context.subscriptions.push(configureTempAdlsPath);
+  // context.subscriptions.push(configureAll);
 
-  const notebookType = 'synapse-spark';
-  const synapseNotebookSerializer = vscode.workspace.registerNotebookSerializer(notebookType, new SynapseNotebookSerializer());
-  const synapseNotebookController = new SynapseNotebookController(notebookType);
-  context.subscriptions.push(synapseNotebookSerializer);
-	context.subscriptions.push(synapseNotebookController);
+  // const notebookType = 'synapse-notebook';
+  // const synapseNotebookSerializer = vscode.workspace.registerNotebookSerializer(notebookType, new SynapseNotebookSerializer());
+  // const synapseNotebookController = new SynapseNotebookController(notebookType);
+  // context.subscriptions.push(synapseNotebookSerializer);
+	// context.subscriptions.push(synapseNotebookController);
 }
 
 // This method is called when your extension is deactivated
