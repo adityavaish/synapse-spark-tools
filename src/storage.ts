@@ -3,8 +3,6 @@ import { DataLakeServiceClient } from "@azure/storage-file-datalake";
 import { vsCodePlugin } from "@azure/identity-vscode";
 import path = require("path");
 
-useIdentityPlugin(vsCodePlugin);
-
 export const uploadFileToTempLocation = async (account: string, fileSystemName: string, path: string, fileName: string, content: string) => {
   const datalakeServiceClient = new DataLakeServiceClient(
     `https://${account}.dfs.core.windows.net`,

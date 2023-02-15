@@ -4,8 +4,6 @@ import { DefaultAzureCredential, useIdentityPlugin } from "@azure/identity";
 import { vsCodePlugin } from "@azure/identity-vscode";
 import { SparkBatchJobOptions, SparkClient } from "@azure/synapse-spark";
 
-useIdentityPlugin(vsCodePlugin);
-
 export const listPools = async (
   subscriptionId: string,
   resourceGroupName: string,

@@ -16,8 +16,6 @@ import {
 } from "./storage";
 var path = require("path");
 
-useIdentityPlugin(vsCodePlugin);
-
 let EXT_CONFIG_ID: string = "synapse-spark";
 
 // This method is called when your extension is activated
