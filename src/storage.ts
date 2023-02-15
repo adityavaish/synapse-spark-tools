@@ -1,6 +1,5 @@
-import { DefaultAzureCredential, useIdentityPlugin } from "@azure/identity";
+import { DefaultAzureCredential } from "@azure/identity";
 import { DataLakeServiceClient } from "@azure/storage-file-datalake";
-import { vsCodePlugin } from "@azure/identity-vscode";
 import path = require("path");
 
 export const uploadFileToTempLocation = async (account: string, fileSystemName: string, path: string, fileName: string, content: string) => {

@@ -1,25 +1,16 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { DefaultAzureCredential, useIdentityPlugin } from "@azure/identity";
+import { DefaultAzureCredential } from "@azure/identity";
 import { StorageManagementClient } from "@azure/arm-storage";
 import { SubscriptionClient } from "@azure/arm-subscriptions";
-import { vsCodePlugin } from "@azure/identity-vscode";
-import {
-  SynapseManagementClient,
-  BigDataPoolResourceInfo,
-} from "@azure/arm-synapse";
+import { SynapseManagementClient, BigDataPoolResourceInfo } from "@azure/arm-synapse";
 import { DataLakeServiceClient } from "@azure/storage-file-datalake";
 import { listPools, submitBatchJob } from "./synapse";
-import {
-  uploadFileToTempLocation
-} from "./storage";
+import { uploadFileToTempLocation } from "./storage";
+
 var path = require("path");
 
 let EXT_CONFIG_ID: string = "synapse-spark";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration(EXT_CONFIG_ID);
 

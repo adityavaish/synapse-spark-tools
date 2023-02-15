@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { SynapseManagementClient } from "@azure/arm-synapse";
-import { DefaultAzureCredential, useIdentityPlugin } from "@azure/identity";
-import { vsCodePlugin } from "@azure/identity-vscode";
+import { DefaultAzureCredential } from "@azure/identity";
 import { SparkBatchJobOptions, SparkClient } from "@azure/synapse-spark";
 
 export const listPools = async (
