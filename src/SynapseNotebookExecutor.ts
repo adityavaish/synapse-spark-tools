@@ -3,7 +3,7 @@ import { getConfig, getCredentials } from "./ConfigurationManager";
 import * as vscode from 'vscode';
 
 const getEndpoint = () => {
-    return `https://${getConfig("workspace")}.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/${getConfig("cluster")}`
+    return `https://${getConfig("workspace")}.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/${getConfig("cluster")}`;
 };
 
 let _sparkClient: SparkClient | undefined = undefined;

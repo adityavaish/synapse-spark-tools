@@ -4,6 +4,7 @@ import { listPools } from "./SynapseUtils";
 import { uploadFileToTempLocation } from "./StorageManager";
 import { SynapseNotebookSerializer } from "./SynapseNotebookSerializer";
 import { getConfig, showAdlsAccountSelection, showAdlsContainerSelection, showAdlsPathInput, showConfigureAll, showPoolsSelection, showSubscriptionsSelection, showSynapseWorkspaceSelection } from "./ConfigurationManager";
+import { SynapseNotebookController } from "./SynapseNotebookController";
 
 var path = require("path");
 
@@ -124,8 +125,6 @@ export async function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  const synapseNotebookSerializer = vscode.workspace.registerNotebookSerializer('synapse-notebook', new SynapseNotebookSerializer());
-
   context.subscriptions.push(selectPool);
   context.subscriptions.push(submitBatch);
   context.subscriptions.push(configureAzureSubscription);
@@ -135,7 +134,11 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(configureTempAdlsPath);
   context.subscriptions.push(configureAll);
 
+  const notebookType = 'synapse-spark';
+  const synapseNotebookSerializer = vscode.workspace.registerNotebookSerializer(notebookType, new SynapseNotebookSerializer());
+  const synapseNotebookController = new SynapseNotebookController(notebookType);
   context.subscriptions.push(synapseNotebookSerializer);
+	context.subscriptions.push(synapseNotebookController);
 }
 
 // This method is called when your extension is deactivated

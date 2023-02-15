@@ -1,40 +1,37 @@
 import * as vscode from 'vscode';
 import { submitCodeCell } from './SynapseNotebookExecutor';
-import { SynapseNotebookExecutorResponse, SynNotebook } from './SynapseNotebookTypes';
 
 export class SynapseNotebookController {
-    readonly controllerId = 'synapse-notebook-controller-id';
-    readonly notebookType = 'synapse-notebook';
     readonly label = 'Synapse kernel';
     readonly supportedLanguages = ['python', 'scala', 'spark'];
 
-    private readonly controller: vscode.NotebookController;
+    private readonly _controller: vscode.NotebookController;
     private _executionOrder = 0;
 
-    constructor() {
-        this.controller = vscode.notebooks.createNotebookController(
-            this.controllerId,
-            this.notebookType,
+    constructor(notebookType: string) {
+        this._controller = vscode.notebooks.createNotebookController(
+            `${notebookType}-controller-id`,
+            notebookType,
             this.label
         );
 
-        this.controller.supportedLanguages = this.supportedLanguages;
-        this.controller.supportsExecutionOrder = true;
-        this.controller.executeHandler = this.execute.bind(this);
+        this._controller.supportedLanguages = this.supportedLanguages;
+        this._controller.supportsExecutionOrder = true;
+        this._controller.executeHandler = this._execute.bind(this);
     }
 
-    private async execute(
+    private async _execute(
         cells: vscode.NotebookCell[],
         _notebook: vscode.NotebookDocument,
         _controller: vscode.NotebookController
     ): Promise<void> {
         for (let cell of cells) {
-            await this.executeCell(cell);
+            await this._doExecution(cell);
         }
     }
 
-    private async executeCell(cell: vscode.NotebookCell): Promise<void> {
-        const execution = this.controller.createNotebookCellExecution(cell);
+    private async _doExecution(cell: vscode.NotebookCell): Promise<void> {
+        const execution = this._controller.createNotebookCellExecution(cell);
         execution.executionOrder = ++this._executionOrder;
         execution.start(Date.now());
 
