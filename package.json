@@ -15,7 +15,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:python"
+    "onLanguage:python",
+    "onLanguage:scala",
+    "onNotebook:synapse-notebook"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -120,28 +122,48 @@
           "description": "Selected Spark pool"
         }
       }
-    }
+    },
+    "notebooks": [
+      {
+        "type": "synapse-notebook",
+        "displayName": "Synapse notebook",
+        "selector": [
+          {
+            "filenamePattern": "*-scala.json"
+          }
+        ]
+      }
+    ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run esbuild-base",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --external:keytar --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./",
-    "compile": "tsc -p ./",
-    "watch": "npm run esbuild-watch",
-    "pretest": "npm run compile && npm run lint",
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@azure/identity-vscode": "^1.0.0",
+    "@types/glob": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.75.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
     "esbuild": "^0.17.1",
     "eslint": "^8.28.0",
+    "glob": "^8.1.0",
     "mocha": "^10.1.0",
-    "typescript": "^4.9.3"
+    "node-loader": "^2.0.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "@azure/arm-storage": "^18.1.0",
@@ -156,6 +178,7 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
     "@types/vscode": "^1.74.0",
-    "glob": "^8.0.3"
+    "glob": "^8.0.3",
+    "synapse-artifacts": "^0.0.1-security"
   }
 }
